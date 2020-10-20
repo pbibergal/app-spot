@@ -1,0 +1,26 @@
+<div class="toolbar">
+  <div class="title">
+    <span class="logo"></span>
+    <h1>I am Groot</h1>
+    <span class="logout">
+      <p (click)="logout()">Logout</p>
+    </span>
+  </div>
+</div>
+<section>
+  <div class="master">
+    <app-artist></app-artist>
+  </div>
+  <div class="detail">
+    <div>
+      <app-select [formControl]="control" [items]="albums"
+                  (selectRow)="selectRow($event)"
+                  (reachedBottom)="reachedBottom()" [disableScroll]="disableScroll"></app-select>
+    </div>
+    <div class="album-detail">
+      <app-album-detail [album]="selectedAlbum"></app-album-detail>
+    </div>
+  </div>
+</section>
+
+

@@ -1,0 +1,13 @@
+<div class="wrap" #wrapElement>
+  <div class="name">
+    <input [formControl]="control" readonly placeholder="Albums">
+    <i class="anchor"></i>
+  </div>
+</div>
+
+<ul #listElement class="list" [hidden]="!displayList" [class.disable-scroll]="disableScroll">
+  <li (click)="rowClick(item)" *ngFor="let item of items">
+    <img [src]="item?.thumbnail" alt="">
+    <span class="name">{{item?.name}}</span>
+  </li>
+</ul>

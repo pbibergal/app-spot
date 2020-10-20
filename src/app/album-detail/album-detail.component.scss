@@ -1,0 +1,33 @@
+.album-image {
+  max-height: 200px;
+}
+
+.grid {
+  display: flex;
+  flex-direction: row;
+}
+
+.album-name {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.album-text {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+p {
+  margin: 0 0 20px;
+}
+
+.album-release {
+  font-size: 13px;
+  font-weight: lighter;
+
+  span {
+    color: #888;
+  }
+}

@@ -1,0 +1,9 @@
+<app-card *ngIf="album">
+  <div class="grid">
+    <img class="album-image" [src]="album.image">
+    <div class="album-text">
+      <p class="album-name">{{album.name}}</p>
+      <p class="album-release">Release: <span>{{album.release_date}}</span></p>
+    </div>
+  </div>
+</app-card>

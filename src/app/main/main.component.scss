@@ -1,0 +1,92 @@
+$page-width: 960px;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.toolbar {
+  height: 64px;
+  background-color: #1ED760;
+  display: flex;
+  place-content: center;
+
+  .title {
+    width: $page-width;
+    display: flex;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+
+    .logo {
+      width: 24px;
+      height: 24px;
+      display: inline-block;
+      mask-image: url(../../assets/spot-mask.png);
+      mask-size: cover;
+      background-color: #fff;
+      place-self: center;
+      margin-right: 10px;
+    }
+
+    h1 {
+      place-self: center;
+      margin: 0;
+      color: #fff;
+      font-weight: normal;
+      font-size: 19px;
+      flex: 1;
+    }
+
+    .logout {
+      place-self: center;
+
+      p {
+        margin-bottom: 10px;
+        cursor: pointer;
+        color: #fff;
+        border-bottom: 1px solid #fff;
+      }
+    }
+  }
+}
+
+section {
+  width: $page-width;
+  margin: auto;
+  height: 100%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.master {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  > div {
+    display: flex;
+  }
+}
+
+.detail {
+  padding: 40px;
+  display: flex;
+  flex-direction: row;
+
+  > div {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+app-select {
+  margin-bottom: 20px;
+}
+
+.album-detail {
+  flex: 1;
+}
