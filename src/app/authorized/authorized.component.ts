@@ -8,20 +8,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./authorized.component.scss'],
 })
 export class AuthorizedComponent implements OnInit {
-
   constructor(private authService: AuthService, private router: Router) {
   }
 
   ngOnInit(): void {
     this.authService.token()
-      .subscribe(token => {
+      .subscribe(async (token) => {
         if (token && token.length > 0) {
-          this.router.navigate(['home']);
+          await this.router.navigate(['home']);
         }
         else {
-          this.router.navigate(['/login']);
+          await this.router.navigate(['/login']);
         }
       });
   }
-
 }

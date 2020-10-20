@@ -3,10 +3,11 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { asyncScheduler, of, Subject } from 'rxjs';
 import { DataService } from '../services/data.service';
-import { ARTIST_ID } from '../constants';
+import { ARTIST_ID, SELECTED_ALBUM } from '../constants';
 import { catchError, filter, map, takeUntil } from 'rxjs/operators';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Album, AlbumResponse, AlbumResponseItem } from '../interfaces/album';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-main',
@@ -28,9 +29,15 @@ export class MainComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private fb: FormBuilder,
+    private storageService: StorageService,
     private zone: NgZone,
   ) {
     this.control = fb.control('');
+
+    if (this.storageService.isItemExists(SELECTED_ALBUM)) {
+      this.selectedAlbum = JSON.parse(this.storageService.getItem(SELECTED_ALBUM));
+      this.control.setValue(this.selectedAlbum.name);
+    }
   }
 
   ngOnInit(): void {
@@ -42,9 +49,9 @@ export class MainComponent implements OnInit {
     this.dataService.fetchAlbums(ARTIST_ID, offset)
       .pipe(
         takeUntil(this.destroy),
-        catchError(err => {
+        catchError(async () => {
           this.authService.logout();
-          this.router.navigate(['login']);
+          await this.router.navigate(['login']);
           return of(null);
         }),
         filter(d => !!d),
@@ -71,12 +78,13 @@ export class MainComponent implements OnInit {
 
   selectRow(item: Album): void {
     this.selectedAlbum = item;
+    this.storageService.setItem(SELECTED_ALBUM, JSON.stringify(this.selectedAlbum));
   }
 
   reachedBottom(): void {
     this.offset++;
     asyncScheduler.schedule(() => {
       this.fetchData(this.offset);
-    }, 200);
+    }, 100);
   }
 }
